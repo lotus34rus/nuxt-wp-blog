@@ -1,5 +1,12 @@
 <template>
-    <div>
-        FOOTER
-    </div>
-</templatFOOTERe>
+    
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      
+    
+    }),
+  }
+</script>
