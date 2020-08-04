@@ -4,28 +4,29 @@
         <img
           src="https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
           alt
+          v-if="thumb.length === 0"
         />
+        <img :src = "thumb" 
+        v-else
+        >
       </div>
 
       <div class="body_post">
         <div class="post_content">
-          <h1>Lorem Ipsum</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi assumenda cumque deserunt
-            dolorum ex exercitationem.
-          </p>
+          <h1 v-html = 'post.title.rendered'></h1>
+          <!-- <p v-html = "post.excerpt.rendered"> </p> -->
 
           <div class="container_infos">
             <div class="postedBy">
               <span>Опубликовано</span>
-               05.05.2019
+               {{ new Date(post.date).toLocaleString().split(",")[0] }}
             </div>
 
             <div class="container_tags">
               <span>Категория </span>
               <div class="tags">
                 <ul>
-                  <li>Vue</li>
+                  <li>{{catName}}</li>
                 </ul>
               </div>
             </div>
@@ -35,28 +36,54 @@
     </div>
 </template>
 
+<script>
+export default {
+    props: ['post'],
+    data() {
+        return {
+            thumb: '',
+            catName: ''
+        }
+    },
+    async mounted() {
+        if(this.post.featured_media){
+            const img = await this.$axios.$get('http://dm-code.ru/wp-json/wp/v2/media/'+ this.post.featured_media)
+            this.thumb = img.guid.rendered
+        }
+        const cat =  await this.$axios.$get('http://dm-code.ru/wp-json/wp/v2/categories/'+ this.post.categories[0])
+        this.catName = cat.name
+
+    },
+}
+</script>
+
+
 <style scoped>
 .post {
   width: 350px;
-  height: 500px;
+  height: 400px;
   display: flex;
   overflow: hidden;
   flex-direction: column;
   position: relative;
   border: 1px solid lightgray;
+  margin-right: 20px;
 }
-.post:hover .header_post {
+.post p{
+    overflow: hidden;
+}
+/* .post:hover .header_post {
   margin-top: -20px;
-}
-.post:hover .body_post {
+} */
+/* .post:hover .body_post {
   height: 50%;
-}
-.post:hover img {
+} */
+/* .post:hover img {
   transform: translatey(-10px) translatex(-5px) scale(1.05);
-}
+} */
 .header_post {
   width: 100%;
-  height: 40%;
+  height: 50%;
   background: #ddd;
   position: absolute;
   top: 0;
@@ -68,12 +95,14 @@
 }
 .header_post img {
   max-width: 100%;
-  height: auto;
+  /* height: auto; */
+  height: 100%;
+  width: 100%;
   transition: ease-in-out 600ms;
 }
 .body_post {
   width: 100%;
-  height: 60%;
+  height: 50%;
   background: #fff;
   position: absolute;
   bottom: 0;
@@ -175,16 +204,5 @@
   height: 18px;
 }
 
-
-@keyframes top {
-  0% {
-    opacity: 0;
-    bottom: -80px;
-  }
-  100% {
-    opacity: 1;
-    bottom: 0px;
-  }
-}
 
 </style>
