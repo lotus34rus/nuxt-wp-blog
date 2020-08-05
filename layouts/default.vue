@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <Banner />
     <Navbar />
     <Nuxt />
@@ -13,5 +13,9 @@
     padding-left: 15px;
     padding-right: 15px;
     margin: 0 auto;
+  }
+  .layout{
+    position: relative;
+    padding-bottom: 80px;
   }
 </style>

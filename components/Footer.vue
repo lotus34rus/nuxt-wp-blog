@@ -24,5 +24,9 @@
   footer{
     border-top: 1px solid lightgray;
     padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 30px);
+    box-sizing: border-box;
   }
 </style>
