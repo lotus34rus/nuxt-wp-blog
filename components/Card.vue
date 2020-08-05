@@ -11,10 +11,10 @@
         >
       </div>
 
-      <div class="body_post">
+      <div class="body_post" @click="$router.push('blog/'+post.id)">
         <div class="post_content">
           <h1 v-html = 'post.title.rendered'></h1>
-          <!-- <p v-html = "post.excerpt.rendered"> </p> -->
+          <p v-html = "post.excerpt.rendered"> </p>
 
           <div class="container_infos">
             <div class="postedBy">
