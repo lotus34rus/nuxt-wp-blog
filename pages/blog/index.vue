@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <div class="category-list">
+
+    </div>
+
     <div class="blog-list">
       <Card v-for="post of posts" :key="post.id" :post="post" />
     </div>

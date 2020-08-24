@@ -26,7 +26,8 @@
     padding: 15px;
     position: absolute;
     bottom: 0;
-    width: calc(100% - 30px);
+    width:100%;
+    /* width: calc(100% - 30px); */
     box-sizing: border-box;
   }
 </style>
