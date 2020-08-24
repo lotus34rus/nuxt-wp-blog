@@ -21,7 +21,9 @@ export default {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid lightgrey;
+        padding-bottom: 20px;
     }
     nav a{
         color: black;

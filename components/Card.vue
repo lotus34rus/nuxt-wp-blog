@@ -1,5 +1,5 @@
 <template>
-     <div class="post">
+     <div class="post" v-if="post.categories[0] == filter || filter == '' ">
       <div class="header_post">
         <img
           src="https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
@@ -38,7 +38,7 @@
 
 <script>
 export default {
-    props: ['post'],
+    props: ['post', 'filter'],
     data() {
         return {
             thumb: '',
