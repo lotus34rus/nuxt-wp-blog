@@ -19,12 +19,17 @@ export default {
     return { post };
   },
 
+
+
   data() {
     return {
       thumb: "",
       catName: "",
+      title: '',
     };
   },
+
+
   async mounted() {
     if (this.post.featured_media) {
       const img = await this.$axios.$get(
@@ -36,7 +41,14 @@ export default {
       "http://dm-code.ru/wp-json/wp/v2/categories/" + this.post.categories[0]
     );
     this.catName = cat.name;
+    this.title = this.post.title.rendered;
   },
+
+  head() {
+      return {
+        title: this.title,
+      }
+  }
 };
 </script>
 
